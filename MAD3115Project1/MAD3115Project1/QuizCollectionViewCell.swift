@@ -15,6 +15,8 @@ enum SelectedOption {
 }
 class QuizCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     
     @IBOutlet weak var option1: UILabel!
@@ -39,12 +41,21 @@ class QuizCollectionViewCell: UICollectionViewCell {
             correctAnswer = setValues?.correct_answer
         }
     }
+    var setProgress: (Int, Int)? {
+        didSet {
+            print("Index", setProgress!.0)
+            progressLabel.text = "\(setProgress!.0)/\(setProgress!.1)"
+            progressBar.progress = Float(setProgress!.0)/Float(setProgress!.1)
+        }
+    }
     
     override func prepareForReuse() {
         updateBorder(myView: option1Control)
         updateBorder(myView: option2Control)
         updateBorder(myView: option3Control)
         updateBorder(myView: option4Control)
+        progressLabel.text = ""
+        progressBar.progress = Float(0)
     }
     
     func changeBorder(selectedOption: SelectedOption) {

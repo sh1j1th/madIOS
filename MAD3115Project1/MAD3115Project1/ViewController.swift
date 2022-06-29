@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     @IBAction func onClickPlay(_ sender: Any) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "QuizViewController") as? QuizViewController else {return}
         self.navigationController?.pushViewController(vc, animated: true)
-        //self.navigationController?.present(vc, animated: false)
     }
 }
 
